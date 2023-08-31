@@ -1,0 +1,7 @@
+[project]
+name = "finscrape"
+
+dependencies = [
+    "requests",
+    "urllib3<2",
+]

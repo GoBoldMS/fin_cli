@@ -1,0 +1,1 @@
+from resource.params import *
