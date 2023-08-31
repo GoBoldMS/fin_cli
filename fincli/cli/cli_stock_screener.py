@@ -8,7 +8,7 @@ from resource.params.technical_params import Technical_Params as tp
 from utils.quary_builders import build_stock_screener_query
 
 def select_filters_and_values(config: Config):
-    filepath = os.path.join(os.getcwd(), "stock_screening",
+    filepath = os.path.join(os.getcwd(),"fincli" ,"stock_screening",
                             "local_history", 'filter_history.json')
 
     # Add checks for use_history
@@ -35,7 +35,7 @@ def select_filters_and_values(config: Config):
 
     # Select filter values
     selected_values = select_values(
-        selected_filters_indices, options, queryOptions)
+        selected_filters_indices, queryOptions)
 
     # Save selected values
     with open(filepath, 'w') as outfile:
@@ -78,7 +78,7 @@ def get_filters_indices(options):
     filters_indices = click.prompt(input_msg, type=str).split(',')
     return [{list(options.keys())[int(idx) - 1]: list(options.values())[int(idx) - 1]} for idx in filters_indices]
 
-def select_values(selected_filters, options, queryOptions):
+def select_values(selected_filters, queryOptions):
     selected_values = {}
 
     for filter_dict in selected_filters:
