@@ -1,1 +1,1 @@
-from resource.params import *
+from . import *

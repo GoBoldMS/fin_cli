@@ -1,4 +1,4 @@
-from resource.params.const import BASE_URL
+from ...resource.params.const import BASE_URL
 
 
 class StockTableScreenerParser:

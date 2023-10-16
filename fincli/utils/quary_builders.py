@@ -1,8 +1,8 @@
 import click
-from resource.params.const import BASE_URL
-from resource.params.descriptive_params import Descriptive_Params
-from resource.params.fundamental_params import Fundamental_Params
-from resource.params.technical_params import Technical_Params
+from ..resource.params.const import BASE_URL
+from ..resource.params.descriptive_params import Descriptive_Params
+from ..resource.params.fundamental_params import Fundamental_Params
+from ..resource.params.technical_params import Technical_Params
 
 
 def build_stock_screener_query(filters_tuple, v=111, ft=2):

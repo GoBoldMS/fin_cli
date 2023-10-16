@@ -1,9 +1,7 @@
 """Config file for the stock screener app."""
-
+import datetime
 import os
-from pathlib import Path
 from core.configuration.config_base import Configurable, SystemSettings
-
 
 class Config(SystemSettings):
     name: str = "Stock Screener CLI config"
@@ -12,6 +10,13 @@ class Config(SystemSettings):
     # Application Settings #
     ########################
     use_history: bool = False
+    filters: tuple = ()
+
+    @staticmethod
+    def file_path(file_name: str) -> str:
+        """Return the path to the file."""
+        date = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M')
+        return os.path.join(os.getcwd(), f'workspace_output/{file_name}_{date}.csv')
 
 
 #For late use if needed to define a strongly typed config builder.
@@ -25,6 +30,5 @@ class ConfigBuilder(Configurable[Config]):
         config_dict = {
             "use_history": os.getenv("USE_HISTORY", default=cls.default_settings.use_history),
         }
-
 
         return Config(**config_dict)

@@ -2,9 +2,11 @@
 autogpt/keys.py
 autogpt/*.json
 workspace_output/*
+fundainsight/local_history/*
 *.mpeg
 .env
 .vscode
+*.pstat
 .idea/*
 venv/*
 log.txt
@@ -18,6 +20,14 @@ fincli/__main__.dist
 fincli/__main__.onefile-build
 fincli/__main__.exe
 fincli/stock_screening/local_history/*
+fundainsight/__main__.build
+fundainsight/__main__.dist
+fundainsight/__main__.onefile-build
+fundainsight/__main__.exe
+fundainsight/stock_screening/local_history/*
+fundainsight/workspace_output/*
+
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

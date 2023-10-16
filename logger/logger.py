@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Any, Optional
 from colorama import Fore
 
 if TYPE_CHECKING:
-    from config import Config
+    from ..config import Config
 
 from singleton import Singleton
 

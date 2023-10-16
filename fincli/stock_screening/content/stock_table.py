@@ -1,8 +1,8 @@
 import re
-from stock_screening.locators.stock_table_locators import StockTableLocators
+from fincli.stock_screening.locators.stock_table_locators import StockTableLocators
 from bs4 import BeautifulSoup
 
-from stock_screening.parsers.stock_table import StockTableScreenerParser
+from fincli.stock_screening.parsers.stock_table import StockTableScreenerParser
 
 
 class StockTableScreeningContent:

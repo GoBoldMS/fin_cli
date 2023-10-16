@@ -13,7 +13,7 @@ def run_main(ctx: click.Context,
     Welcome to the Stock Screener CLI!
     """
     click.echo("Welcome to the Stock Screener CLI!")
-    from app.main import run_stock_screener
+    from .main import run_stock_screener
     
     if ctx.invoked_subcommand is None:
         run_stock_screener(history=history,debug=debug)

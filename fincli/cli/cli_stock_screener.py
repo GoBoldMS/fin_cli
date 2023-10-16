@@ -2,18 +2,19 @@ import json
 import os
 import click
 from config.config import Config
-from resource.params.fundamental_params import Fundamental_Params as fp
-from resource.params.descriptive_params import Descriptive_Params as dp
-from resource.params.technical_params import Technical_Params as tp
-from utils.quary_builders import build_stock_screener_query
+from ..resource.params.fundamental_params import Fundamental_Params as fp
+from ..resource.params.descriptive_params import Descriptive_Params as dp
+from ..resource.params.technical_params import Technical_Params as tp
+from ..utils.quary_builders import build_stock_screener_query
+
 
 def select_filters_and_values(config: Config):
-    filepath = os.path.join(os.getcwd(),"fincli" ,"stock_screening",
-                            "local_history", 'filter_history.json')
 
     # Add checks for use_history
     if config.use_history:
-        click.echo("Fetching user history from filter_history.json")
+        filepath = os.path.join(os.path.realpath('fincli'),"stock_screening",
+                                "local_history", 'filter_history.json')
+        click.echo(f"Fetching user history from filter_history.json {filepath}")
 
         with open(filepath, 'r') as f:
             selected_values_and_filters = json.load(f)
@@ -38,8 +39,9 @@ def select_filters_and_values(config: Config):
         selected_filters_indices, queryOptions)
 
     # Save selected values
-    with open(filepath, 'w') as outfile:
-        json.dump(selected_values, outfile)
+    if config.use_history:
+        with open(filepath, 'w') as outfile:
+            json.dump(selected_values, outfile)
 
     # Generate the query
     query = build_stock_screener_query(selected_values.items())

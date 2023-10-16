@@ -1,13 +1,11 @@
-import datetime
 import logging
-import os
 import pandas as pd
-from app.configurator import build_config
-from cli.cli_stock_screener import select_filters_and_values
-from stock_screening.content.stock_table import StockTableScreeningContent
-from utils.web_scraper import fetch_page_sync
-from logs.logger import logger
-from stock_screening.locators.stock_table_locators import StockTableLocators
+from .configurator import build_config
+from fincli.stock_screening.content.stock_table import StockTableScreeningContent
+from fincli.cli.cli_stock_screener import select_filters_and_values
+from logger.logger import logger
+from fincli.stock_screening.locators.stock_table_locators import StockTableLocators
+from fincli.utils.web_scraper import fetch_page_sync
 
 
 def fetch_urls(quarry, page_count):
@@ -26,9 +24,24 @@ def aggregate_rows(pages):
 def build_dataframe(data_rows):
     df = pd.concat([pd.DataFrame(row) for row in data_rows])
     df.columns = StockTableLocators.PD_TABLE_COLUMNS
+    df["Market Cap"] = df["Market Cap"].apply(lambda x: convert_market_cap_to_numeric(x))
+    df['Symbol'] = df['Ticker']
     df['Ticker'] = '=HYPERLINK("' + df['Link'] + '", "' + df['Ticker'] + '")'
     df.drop(columns=['Link'], axis=1, inplace=True)
     return df
+
+def convert_market_cap_to_numeric(market_cap):
+    market_cap.replace("'","")
+    if market_cap.__contains__('B'):
+        return float(market_cap.replace("B","")) * 1000000000
+    elif market_cap.__contains__('M'):
+        return float(market_cap.replace("M","")) * 1000000
+    elif market_cap.__contains__('T'):
+        return float(market_cap.replace("T","")) * 1000000000000
+    elif market_cap.__contains__('_'):
+        return market_cap.replace("_","N/A")
+    else:
+        return float(market_cap)
 
 
 def run_stock_screener(history: bool = False, debug: bool = False):
@@ -57,11 +70,9 @@ def run_stock_screener(history: bool = False, debug: bool = False):
         return
 
     final_df = build_dataframe(data_rows)
-
     logger.info(f"Data frame created successfully", "Data Handling --->")
-    date = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M')
     logger.info(f"Saving data frame to csv file", "Data Handling --->")
-    file_path = os.path.join(
-        os.getcwd(), f'workspace_output\stock_screener_{date}.csv')
+    file_path = config.file_path("stock_screener")
     final_df.to_csv(file_path, index=False)
     logger.info(f"File saved to {file_path}", "Data Handling --->")
+

@@ -1,4 +1,4 @@
-from logs.logger import logger
+from logger.logger  import logger
 from random import choice
 import requests
 import cfscrape
@@ -30,5 +30,6 @@ def fetch_page_sync(url):
     page_start = time.time()
     scraper = cfscrape.create_scraper()
     content = scraper.get(url).content
+ 
     logger.info(f'{url} took {time.time() - page_start}',"Page fetched successfully")
     return content
