@@ -11,7 +11,7 @@ class Config(SystemSettings):
     ########################
     use_history: bool = False
     filters: tuple = ()
-
+    scrape_link: str = ""
     @staticmethod
     def file_path(file_name: str) -> str:
         """Return the path to the file."""

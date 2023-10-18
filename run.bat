@@ -37,11 +37,11 @@ echo Invalid choice. Please choose 1 or 2.
 goto Menu
 
 :RunFincli
-%PYTHON_CMD% -m fincli --hist%*
+%PYTHON_CMD% -m fincli%*
 goto End
 
 :RunFundainsight
-%PYTHON_CMD% -m fundainsight --hist%*
+%PYTHON_CMD% -m fundainsight%*
 goto End
 
 :End

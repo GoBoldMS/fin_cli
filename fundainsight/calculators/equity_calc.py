@@ -8,6 +8,8 @@ def calculate_price_to_data(financial_data, column_name):
 
 
 def ratio_between_two_values(value1, value2):
+    if  value2 == 0:
+        return 0
     return value1/value2
 
 
@@ -25,13 +27,21 @@ def get_financial_data(ticker_name):
     # Get the ticker object
     try:
         ticker = yf.Ticker(ticker_name)
+
+    # Get the financial data
+        balance_sheet = ticker.quarterly_balance_sheet
+        if balance_sheet.empty:
+            logger.error(
+                f"Error getting balance sheet for ticker {ticker_name}")
+            return None
+        info = ticker.info
+        if info is None:
+            logger.error(f"Error getting info for ticker {ticker_name}")
+            return None
     except:
         logger.error(f"Error getting ticker {ticker_name}")
         return None
 
-    # Get the financial data
-    balance_sheet = ticker.quarterly_balance_sheet
-    info = ticker.info
     shares_outstanding = info['sharesOutstanding']
     market_cap = info['marketCap']
     total_assets = balance_sheet.loc['Total Assets'].iloc[0]
