@@ -1,6 +1,6 @@
 import logging
 import pandas as pd
-from .configurator import build_config
+from core.configuration import configurator
 from fincli.stock_screening.content.stock_table import StockTableScreeningContent
 from fincli.cli.cli_stock_screener import select_filters_and_values
 from logger.logger import logger
@@ -21,7 +21,7 @@ def aggregate_rows(pages):
     return [row.table_data for row in rows]
 
 
-def build_dataframe(data_rows):
+def build_data_frame(data_rows):
     df = pd.concat([pd.DataFrame(row) for row in data_rows])
     df.columns = StockTableLocators.PD_TABLE_COLUMNS
     df["Market Cap"] = df["Market Cap"].apply(lambda x: convert_market_cap_to_numeric(x))
@@ -47,7 +47,7 @@ def convert_market_cap_to_numeric(market_cap):
 def run_stock_screener(history: bool = False, debug: bool = False):
     logger.set_level(logging.DEBUG if debug else logging.INFO)
 
-    config = build_config(use_history=history)
+    config = configurator.build_config(use_history=history)
     logger.debug(f"Config: {config}", "Config created successfully:")
 
     quarry = select_filters_and_values(config)
@@ -69,7 +69,7 @@ def run_stock_screener(history: bool = False, debug: bool = False):
                      )
         return
 
-    final_df = build_dataframe(data_rows)
+    final_df = build_data_frame(data_rows)
     logger.info(f"Data frame created successfully", "Data Handling --->")
     logger.info(f"Saving data frame to csv file", "Data Handling --->")
     file_path = config.file_path("stock_screener")
