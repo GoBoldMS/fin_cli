@@ -19,7 +19,7 @@ def build_config(
             filters = json.load(f)
             config.filters = tuple(filters.items())
     
-    if filters is not "" and not use_history:
+    if filters != "" and not use_history:
         config.filters = json_to_tuples(filters)
 
     return config
