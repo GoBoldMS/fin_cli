@@ -1,5 +1,5 @@
 from config import config
-from fincli.app.main import aggregate_rows, build_dataframe, fetch_urls
+from fincli.app.main import aggregate_rows, build_data_frame, fetch_urls
 from fincli.stock_screening.content.stock_table import StockTableScreeningContent
 from fincli.utils.quary_builders import build_stock_screener_query
 from fincli.utils.web_scraper import fetch_page_sync
@@ -35,7 +35,7 @@ def get_recommended_stocks(filters: tuple, scrape_link: str = ""):
         logger.error("Data Handling --->",
                      f"No data was found for the given filters")
 
-    final_df = build_dataframe(data_rows)
+    final_df = build_data_frame(data_rows)
 
     logger.info(f"Data frame created successfully", "Data Handling --->")
 

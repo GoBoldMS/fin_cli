@@ -19,7 +19,7 @@ def run_main(
  
 
     if ctx.invoked_subcommand is None:
-        get_opportunities(history=history,debug=debug,set_filters=set_filters,scrape_link=scrape_link)
+       get_opportunities(history=history,debug=debug,set_filters=set_filters,scrape_link=scrape_link)
 
 
 if __name__ == '__main__':
