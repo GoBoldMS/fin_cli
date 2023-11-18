@@ -1,49 +1,44 @@
 # Fin CLI
-A simple cli tool for getting stock data from Finzive.com.
 
-Featuring:
-  - fincli for stock screening based on all finzive.com options.
-  - fundainsight calcutalting and screening stocks based on price/assets ratio
+## About
+Fin CLI is a versatile command-line tool designed for financial analysts and enthusiasts. It enables efficient stock data retrieval from Finzive.com. This tool stands out for its ease of use, comprehensive stock screening options, and detailed financial calculations, including price/assets ratio analysis.
 
-## Quick start
+## Features
+- Stock screening with full range of Finzive.com options.
+- Fundainsight for in-depth stock analysis.
+- Outputs results to a convenient CSV format.
 
-1. ./run.sh for linux or run.bat
-2. choose the fincli/fundainsight and fallow the steps.
+## Quick Start
+1. Run `./run.sh` on Linux or `run.bat` on Windows.
+2. Select between `fincli` or `fundainsight` and follow the prompts.
 
-All outputs are saved to csv file.
+## Dependencies
+- Python version less than 3.10. (Specify why this version is necessary if applicable.)
 
-### Dependencies
+## Installation and Running
+Clone the repository and navigate to the project directory:
+git clone [repository-link]
+cd fin_cli
+If the main script doesn't work, install the necessary libraries:
+pip install -r requirements.txt
 
-* Python <3.10
+## Usage
+### Fincli
+- Use `--history` or `--hist` to apply filters from recent searches.
+- `--debug` for detailed logging.
 
+### Fundainsight
+- Includes all Fincli flags.
+- `--set-filters` to specify filters.
+- `--scrape-link` to set the scrape link (must include all filters from Finzive).
 
-### Installing and Running
-
-* If main script is not working run pip install to all the lib in pyproject.toml. 
-
-### Usage
-
-Flags:
-  Fincli
-    -  '--history','--hist' for using filters of recent search.
-    -  '--debug' Display details logging.
-  Fundainsight
-    -  '--history','--hist' for using filters of recent search.
-    -  '--debug' Display details logging.
-    -  '--set-filters' Set filters to be used.
-    -  '--scrape-link' Set the scrape link to be used. (scrpe link must include all the filters from finzive)
-
-Fundainsight works automaticly.
-Fincli will prompt a quarry builder if --history flag is not used.
-  
 ## Contributing
-
-Guidelines for how to contribute to this project.
+We welcome contributions! Please refer to our contribution guidelines for more information on how you can contribute to the project.
 
 ## Authors
-
-* [GoBoldMS](https://github.com/GoBoldMS) - Initial work
+- GoBoldMS - Initial work
 
 ## License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-This project is open-source and available under MIT license.
+Feel free to customize and expand this template to fit the specific needs and nuances of your project.
