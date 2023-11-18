@@ -40,6 +40,8 @@ def convert_market_cap_to_numeric(market_cap):
         return float(market_cap.replace("T","")) * 1000000000000
     elif market_cap.__contains__('_'):
         return market_cap.replace("_","N/A")
+    elif market_cap.__contains__('-'):
+        return market_cap.replace("-","N/A")
     else:
         return float(market_cap)
 
