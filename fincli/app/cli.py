@@ -2,7 +2,7 @@ import click
 import os
 
 @click.group(invoke_without_command=True)
-@click.option('--history','--hist',is_flag=True,help='Display the history of filters used.')
+@click.option('--history','--hist',is_flag=True,help='Use filters of recent search.')
 @click.option('--debug',is_flag=True,help='Display details logging.')
 @click.pass_context
 def run_main(ctx: click.Context,
