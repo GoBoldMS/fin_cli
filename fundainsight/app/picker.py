@@ -38,6 +38,7 @@ def picker(df: DataFrame | None):
 
     assign_old_df_to_new_df(df, df_fundamentals, "Ticker")
     assign_old_df_to_new_df(df, df_fundamentals, "Sector")
+    assign_old_df_to_new_df(df, df_fundamentals, "Industry")
     assign_old_df_to_new_df(df, df_fundamentals, "Country")
 
     logger.info(f"Calculating the price to assets ratio",
@@ -48,6 +49,7 @@ def picker(df: DataFrame | None):
     columns_to_retain = [
         'Ticker',
         'Sector',
+        'Industry',
         'Country',
         'Market Cap',
         'Average Price in Last 30 Days',

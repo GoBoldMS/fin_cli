@@ -1,7 +1,7 @@
 # Fin CLI
 
 ## About
-Fin CLI is a versatile command-line tool designed for financial analysts and enthusiasts. It enables efficient stock data retrieval from Finzive.com. This tool stands out for its ease of use, comprehensive stock screening options, and detailed financial calculations, including price/assets ratio analysis.
+Fin CLI is a versatile command-line tool designed for financial analyses. It enables efficient stock data retrieval from Finzive.com. This tool stands out for its ease of use, comprehensive stock screening options, and simplified easy to use reports.
 
 ## Features
 - Stock screening with full range of Finzive.com options.
@@ -36,7 +36,7 @@ pip install -r requirements.txt
 We welcome contributions! Please refer to our contribution guidelines for more information on how you can contribute to the project.
 
 ## Authors
-- GoBoldMS - Initial work
+- Yonatan Levin - Initial work
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.

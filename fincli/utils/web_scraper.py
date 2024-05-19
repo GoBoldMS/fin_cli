@@ -1,4 +1,6 @@
-from logger.logger  import logger
+from pickle import NONE
+import re
+from logger.logger import logger
 from random import choice
 import requests
 import cfscrape
@@ -15,21 +17,35 @@ user_agents = [
 ]
 
 
-def scrape(url: str):
+def scrape(url: str, headers: dict , timeout: int = 10) -> bytes | None:
     try:
-        headers = {
-            'user-agent': choice(user_agents),
-        }
-        response = session.get(url, headers=headers, timeout=10).content
-    except requests.exceptions.HTTPError as errh:
-        raise Exception("Http Error:", errh)
+        page_start = time.time()
+        if headers is None:
+            headers = {
+                'user-agent': choice(user_agents),
+            }
 
-    return response
+        response = session.get(url, headers=headers, timeout=10)
+
+    except requests.exceptions.HTTPError as errh:
+        logger.error(f'{errh}', "Http Error:")
+        return None
+
+    if response.status_code != 200:
+        logger.error(f'{response.status_code} {response.reason} {url}',
+                     "Page fetch failed")
+        return None
+
+    logger.info(f'{url} took {time.time() - page_start}',
+                "Page fetched successfully")
+    return response.content
+
 
 def fetch_page_sync(url):
     page_start = time.time()
     scraper = cfscrape.create_scraper()
     content = scraper.get(url).content
- 
-    logger.info(f'{url} took {time.time() - page_start}',"Page fetched successfully")
+
+    logger.info(f'{url} took {time.time() - page_start}',
+                "Page fetched successfully")
     return content

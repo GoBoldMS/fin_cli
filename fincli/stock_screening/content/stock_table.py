@@ -14,9 +14,12 @@ class StockTableScreeningContent:
             StockTableScreenerParser(e)
             for e in self.soup.select(StockTableLocators.STOCKS_TABLE)
         ]
+
     @property
     def page_count(self):
         content = self.soup.find_all(class_=StockTableLocators.PAGE_CLASS)
-        num_of_pages = int(content[-2].string) if len(content) != 0 else 0
-        
+        try:
+            num_of_pages = int(content[-2].string) if len(content) != 0 else 0
+        except IndexError:
+            num_of_pages = 1
         return num_of_pages
